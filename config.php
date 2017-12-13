@@ -1,6 +1,6 @@
 <?php
 
-/* =================    Database connection ==================== */
+/* ================= Database connection ======================= */
 $servername = "localhost";
 $username = "root";
 $password = "1996";
@@ -13,7 +13,5 @@ $conn->exec("SET NAMES utf8");
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-/* =================    Site configs ============================ */
+/* ================= Site configs ============================== */
 define('URL', 'http://localhost/parinaz/'); 
-
-?>
