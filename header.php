@@ -10,7 +10,8 @@
             <div class="navbar-header">
             <a class="navbar-brand " href="#" style="text-align:center">WebSiteName</a>
             </div>
-            <form class="navbar-form navbar-right">
-            <button type="submit" class="btn btn-default">new</button>
+            <form class="navbar-form navbar-right" action="new.php">
+              <button type="submit" class="btn btn-default">new</button>
+            </form>
         </div>
     </nav>

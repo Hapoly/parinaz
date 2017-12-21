@@ -12,9 +12,8 @@ $stmt->execute();
 $result = $stmt->setFetchMode(PDO::FETCH_ASSOC); 
 $count = 0;
 foreach($stmt->fetchAll() as $row) { 
-  $count = $row['count'];
+  $count = $row['COUNT(*)'];
 }
-var_dump($count);
 
 $select_query = "SELECT * FROM `$table_name` WHERE 1";
 $stmt = $conn->prepare($select_query); 
@@ -67,11 +66,14 @@ require_once('./header.php');
 <div class="container" style="text-align:center;margin-top:40px;">
     <ul class="pagination">
       <?php
-        
+        if($count > 10){
+          echo '
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+          ';
+        }
       ?>
-        <li><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
     </ul>
 </div>
 <?php

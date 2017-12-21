@@ -2,7 +2,7 @@
 
 $table_name = "users";
 /*
-  type:       VARCHAR, INT, text
+  type:       VARCHAR, INT, TEXT
   length:     a non-negative number
   default:    Null, None, as_defined(some vars), CURRENT_TIMESTAMP
   collation:  the standard collation text
@@ -22,7 +22,13 @@ $model = [
     "index"       => "PRIMARY",
     "AI"          => true,
     "null"        => false,
-    "comment"     => "the primary id"
+    "comment"     => "the primary id",
+
+    // inputs in edit and new page
+    "title"       => "the primary id",
+    "placeholder" => "you can left this field null",
+    "input_type"  => "number",
+    
   ],
   "username" => [
     "type"        => "VARCHAR",
@@ -33,10 +39,15 @@ $model = [
     "index"       => NULL,
     "AI"          => false,
     "null"        => false,
-    "comment"     => "username"
+    "comment"     => "username",
+    
+    // inputs in edit and new page
+    "title"       => "Username",
+    "placeholder" => "admin",
+    "input_type"  => "number"
   ],
   "password" => [
-    "type"        => "varchar",
+    "type"        => "VARCHAR",
     "length"      => "32",
     "default"     => "None",
     "collation"   => NULL,
@@ -44,10 +55,15 @@ $model = [
     "index"       => NULL,
     "AI"          => false,
     "null"        => false,
-    "comment"     => "password"
+    "comment"     => "password",
+    
+    // inputs in edit and new page
+    "title"       => "Password",
+    "placeholder" => "passwrod",
+    "input_type"  => "password"
   ],
   "status" => [
-    "type"        => "int",
+    "type"        => "INT",
     "length"      => "1",
     "default"     => 1,
     "collation"   => NULL,
@@ -55,6 +71,14 @@ $model = [
     "index"       => NULL,
     "AI"          => false,
     "null"        => false,
-    "comment"     => "1: active, 2: deactive"
+    "comment"     => "1: active, 2: deactive",
+    
+    // inputs in edit and new page
+    "title"       => "Status",
+    "input_type"  => "select",
+    "options"     => [
+      [ "value" => 1, "title" => "active"],
+      [ "value" => 2, "title" => "inactive"],
+    ]
   ]
 ];
