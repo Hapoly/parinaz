@@ -11,6 +11,10 @@ $table_name = "users";
   index:      the standard index text
   AI:         true/false
   comment:    text
+
+  input types: text, password, email, number, select, text area
+
+  visible in list: true/false
 */
 $model = [
   "id" => [
@@ -29,6 +33,8 @@ $model = [
     "placeholder" => "you can left this field null",
     "input_type"  => "number",
     
+    "visible_in_list" => true,
+    "visible_in_view" => true,
   ],
   "username" => [
     "type"        => "VARCHAR",
@@ -44,7 +50,10 @@ $model = [
     // inputs in edit and new page
     "title"       => "Username",
     "placeholder" => "admin",
-    "input_type"  => "number"
+    "input_type"  => "text",
+
+    "visible_in_list" => true,
+    "visible_in_view" => true,
   ],
   "password" => [
     "type"        => "VARCHAR",
@@ -60,7 +69,10 @@ $model = [
     // inputs in edit and new page
     "title"       => "Password",
     "placeholder" => "passwrod",
-    "input_type"  => "password"
+    "input_type"  => "password",
+
+    "visible_in_list" => false,
+    "visible_in_view" => false,
   ],
   "status" => [
     "type"        => "INT",
@@ -79,6 +91,9 @@ $model = [
     "options"     => [
       [ "value" => 1, "title" => "active"],
       [ "value" => 2, "title" => "inactive"],
-    ]
+    ],
+
+    "visible_in_list" => true,
+    "visible_in_view" => true,
   ]
 ];

@@ -1,7 +1,6 @@
 <?php
 require_once('config.php');
 require_once('model.php');
-require_once('columns.php');
 require_once('./libs/model_sync.php');
 
 sync_model($conn, $model);
@@ -30,8 +29,9 @@ require_once('./header.php');
           <thead>
           <tr>
             <?php
-              foreach($columns_definition as $column_def)
-                echo '<th>'. $column_def['title'] .'</th>';
+              foreach($model as $field_title => $field_config)
+                if($field_config['visible_in_list'])
+                  echo '<th>'. $field_config['title'] .'</th>';
             ?>
             <th>operations</th>
           </tr>
@@ -40,13 +40,18 @@ require_once('./header.php');
           <?php
             foreach($stmt->fetchAll() as $row) { 
               echo "<tr>";
-              for($i=0; $i<sizeof($columns_definition); $i++){
-                $column_def = $columns_definition[$i];
-                $value = $row[$column_def['column']];
-                if($column_def['enum']){
-                  echo '<td>'. $column_def['enum'][$value] .'</td>';
-                }else{
-                  echo '<td>'. $value .'</td>';
+              foreach($model as $field_title => $field_config){
+                if($field_config['visible_in_list']){
+                  if($field_config['input_type'] == 'select'){
+                    $value = $row[$field_title];
+                    foreach($field_config['options'] as $option)
+                      if($option['value'] = $value)
+                        $value = $option['title'];
+                    
+                        echo '<td>'. $value .'</td>';
+                  }else{
+                    echo '<td>'. $row[$field_title] .'</td>';
+                  }
                 }
               }
               echo "
