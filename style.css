@@ -14,3 +14,7 @@
  tr,th,td{
      text-align: center;
  }
+
+ .left-align{
+  text-align: left;
+ }
