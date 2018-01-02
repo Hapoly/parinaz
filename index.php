@@ -4,22 +4,15 @@ require_once('model.php');
 require_once('./libs/model_sync.php');
 
 sync_model($conn, $model);
+$page = 0;
+if(isset($_GET['page']))
+  $page = $_GET['page'];
 
-$count_query = 'SELECT COUNT(*) FROM `users` WHERE 1';
-$stmt = $conn->prepare($count_query); 
-$stmt->execute();
-$result = $stmt->setFetchMode(PDO::FETCH_ASSOC); 
-$count = 0;
-foreach($stmt->fetchAll() as $row) { 
-  $count = $row['COUNT(*)'];
-}
-
-$select_query = "SELECT * FROM `$table_name` WHERE 1";
+$select_query = "SELECT * FROM `$table_name` WHERE 1 LIMIT 10 OFFSET " . ($page*10);
 $stmt = $conn->prepare($select_query); 
 $stmt->execute();
 
 $result = $stmt->setFetchMode(PDO::FETCH_ASSOC); 
-
 require_once('./header.php');
 ?>
 <div class="container" style="margin-top:50px;">
@@ -67,19 +60,29 @@ require_once('./header.php');
       </table>
     </div>
   </div>
-</div>
-<div class="container" style="text-align:center;margin-top:40px;">
-    <ul class="pagination">
-      <?php
-        if($count > 10){
-          echo '
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-          ';
-        }
-      ?>
-    </ul>
+<?php
+$count_query = 'SELECT COUNT(*) FROM `users` WHERE 1';
+$stmt = $conn->prepare($count_query); 
+$stmt->execute();
+$result = $stmt->setFetchMode(PDO::FETCH_ASSOC); 
+$count = 0;
+foreach($stmt->fetchAll() as $row) { 
+  $count = $row['COUNT(*)'];
+}
+if($count > 10){
+  echo '
+    <div class="row" style="text-align: center" >
+      <ul class="pagination">
+        <li><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+      </ul>
+    </div>
+  ';
+}
+?>
 </div>
 <?php
 require_once('./footer.php');
